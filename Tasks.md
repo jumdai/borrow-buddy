@@ -53,8 +53,8 @@
 - [ ] T5.1 ปิดการสมัครสมาชิกเองใน Supabase Auth และสร้างบัญชีเจ้าของใน Dashboard (ยืนยันอีเมลแล้ว)
 - [x] T5.2 เขียน migration ใน `supabase/migrations/`: ตาราง `loans` ตาม design.md ข้อ 4 (คอลัมน์, check constraint, ดัชนี `owner_id`, trigger `updated_at`)
 - [x] T5.3 เพิ่มใน migration: เปิด RLS, policy `select`/`insert`/`update` สำหรับ `authenticated` ตาม design.md ข้อ 6, ไม่มี policy `delete` และ revoke delete
-- [ ] T5.4 apply migration แล้วตรวจ security advisors ต้องไม่มีคำเตือน
-  - สถานะ 2026-09-25: ตาราง `loans` ไม่มีคำเตือนแล้ว เหลือคำเตือนของฟังก์ชัน `public.rls_auto_enable()` ที่มีอยู่เดิมในโปรเจ็กต์ ต้องรัน `supabase/migrations/20260925000100_revoke_rls_auto_enable_execute.sql` (รอเจ้าของโปรเจ็กต์อนุมัติ)
+- [x] T5.4 apply migration แล้วตรวจ security advisors ต้องไม่มีคำเตือน
+  - รวมถึงถอนสิทธิ์ EXECUTE ของฟังก์ชันเดิม `public.rls_auto_enable()` (event trigger `ensure_rls` ยังทำงานตามปกติ)
 
 **ตั้งค่าฝั่งเว็บ**
 - [x] T5.5 ติดตั้ง `@supabase/supabase-js`, สร้าง `.env.example`, ตรวจว่า `.env.local` อยู่ใน `.gitignore`
